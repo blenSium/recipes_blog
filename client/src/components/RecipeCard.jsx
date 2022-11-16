@@ -11,7 +11,9 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -24,14 +26,22 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeCard({recipe,userId}) {
+export default function RecipeCard({recipe}) {
   const [expanded, setExpanded] = React.useState(false);
+  const [user, setUser] = React.useState({});
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+const getUser = async()=>{
+  const {data} = await axios.get(`http://localhost:8000/users/${recipe.userId}`)
+  setUser(data)
+}
 
+React.useEffect(()=>{
+  getUser()
+},[])
 
   return (
     <Card sx={{ maxWidth: 345 }} style={{marginBottom:'20px', width:'345px'}}>
@@ -75,6 +85,9 @@ export default function RecipeCard({recipe,userId}) {
           <Typography paragraph style={{width:"100%"}}>
             {recipe.recipe}
           </Typography>
+          <Link to={`/${user._id}`} style={{width:"100%"}} className="underline hover:text-blue-400">
+            {user.fullName}
+          </Link>
         </CardContent>
       </Collapse>
     </Card>

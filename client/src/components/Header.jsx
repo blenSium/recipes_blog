@@ -22,7 +22,7 @@ export default function Header() {
               {userId ? null : (
                 <li className="flex items-center">
                   <button
-                    className="block py-1 pr-4 pl-3 text-lg text-white "
+                    className="block py-1 pr-4 pl-3 text-lg text-white hover:underline"
                     aria-current="page"
                     style={{ color: "#FCA2AD" }}
                     onClick={() => setShowLogIn(true)}
@@ -33,7 +33,7 @@ export default function Header() {
                     /
                   </span>
                   <button
-                    className="block py-1 pr-4 pl-3 text-lg "
+                    className="block py-1 pr-4 pl-3 text-lg hover:underline"
                     aria-current="page"
                     style={{ color: "#FCA2AD" }}
                     onClick={() => setShowSignUp(true)}
@@ -72,13 +72,14 @@ export default function Header() {
         </div>
       </nav>
       <div className="header"></div>
-      <div className="about text-right container pr-10 pt-10">
+      <div className="about text-right container pr-5 md:pr-10 pt-10">
         <h3>? COOKIT אז מה זה בעצם</h3>
         <p>
           בלוג מתכונים משותף בו תוכלו למצוא את המתכונים שתמיד חיפשתם או <br />{" "}
           להירשם ולחלוק איתנו את המתכונים המנצחים שלכם
         </p>
       </div>
+      {/* <Link to={}>כל המתכונים</Link> */}
       <Login visible={showLogIn} onClose={handleOnCloseLogIn} />
       <SignUP visible={showSignUp} onClose={handleOnCloseSignUp} />
     </>

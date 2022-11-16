@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import RecipeCard from "./RecipeCard";
 
+
 export default function PostsFeed() {
   const [posts, setPosts] = useState([]);
   const [input, setInput] = useState("");
+  const [display, setDisplay] = useState("none");
 
   useEffect(() => {
     const getPosts = async () => {
@@ -15,15 +17,23 @@ export default function PostsFeed() {
     getPosts();
   }, []);
 
-  const filteredRecipes = (e) => {
-    const filtered = posts.filter((post) => post.title === e.target.value);
-    setPosts(filtered);
-  };
+  const filteredRecipes = () => {
+   const array= posts.filter((post) => {
+      if (post.title.includes(input)) {
+         return post; }
+     })
+     if(array.length<=0){
+      return posts
+     }
+     else{
+      return array
+     }
+    };
 
   return (
     <div className="mt-20">
       <label className="sr-only">Search</label>
-      <div className="relative w-full md:w-2/4 m-auto mb-10">
+      <div className="relative w-2/3 md:w-2/4 m-auto mb-10">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <svg
             aria-hidden="true"
@@ -50,17 +60,10 @@ export default function PostsFeed() {
         />
       </div>
       <div className="m-auto flex flex-wrap justify-around">
-        {posts
-          .filter((post) => {
-            if (input === "") {
-              return post;
-            } else if (post.title.includes(input)) {
-              return post;
-            } 
-          })
-          .map((post) => (
+        { 
+          filteredRecipes()?.map((post) => (
             <div key={post._id} className="">
-              <RecipeCard recipe={post} />
+              <RecipeCard recipe={post}/>
             </div>
           ))}
       </div>

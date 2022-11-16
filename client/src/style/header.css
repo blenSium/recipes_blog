@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .header {
   background: url("../assets/background-header.png") no-repeat left;
   width: 100%;
@@ -13,10 +14,10 @@
   font-weight: bold;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 600px) {
   .header {
-    min-height: 485px;
-    min-width: 300px;
+    background: url("../assets/‏‏background-mobile.png") no-repeat cover;
+    background-position: center;
   }
 }
 /*# sourceMappingURL=header.css.map */

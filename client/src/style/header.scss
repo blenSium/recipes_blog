@@ -12,9 +12,12 @@
    font-weight: bold;
    }
 
-    @media(max-width:767px) {
-       .header{
-            min-height: 485px;
-            min-width: 300px;
-       } 
-    }
+
+
+
+@media screen and(max-width: 600px){
+   .header{
+      background: url('../assets/‏‏background-mobile.png') no-repeat cover;
+      background-position: center;
+   } 
+}
