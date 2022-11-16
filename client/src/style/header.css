@@ -1,0 +1,22 @@
+.header {
+  background: url("../assets/background-header.png") no-repeat left;
+  width: 100%;
+  background-size: cover;
+  min-height: 570px;
+  display: block;
+  padding-top: 0px;
+}
+
+.about {
+  font-family: 'Amatic SC', cursive;
+  font-size: 55px;
+  font-weight: bold;
+}
+
+@media (max-width: 767px) {
+  .header {
+    min-height: 485px;
+    min-width: 300px;
+  }
+}
+/*# sourceMappingURL=header.css.map */
