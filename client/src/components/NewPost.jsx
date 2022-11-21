@@ -1,15 +1,16 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function NewPost({ visible, onClose }) {
+export default function NewPost() {
   const userId = sessionStorage.getItem("userId");
   const [file, setFile] = useState(null);
   const [imgUrl, setImgUrl] = useState("");
   const [ingredient, setIngredients] = useState([]);
   const [input, setInput] = useState("");
   const [post, setPost] = useState({ userId: userId, recipe: ingredient });
-  if (!visible) return null;
+  const navigate = useNavigate()
 
   const uploadImg = async () => {
     try {
@@ -21,7 +22,6 @@ export default function NewPost({ visible, onClose }) {
       );
       console.log("uploadImg");
       setImgUrl(data);
-      console.log(imgUrl);
     } catch (err) {
       console.log(err);
     }
@@ -33,13 +33,11 @@ export default function NewPost({ visible, onClose }) {
 
   const getIngredients = () => {
     ingredient.push(input);
-    console.log(ingredient);
   };
 
   const handleInput = async (e) => {
     e.preventDefault();
     setPost({ ...post, [e.target.name]: e.target.value, img: imgUrl });
-    console.log(post);
   };
   const addPost = async (obj) => {
     const { data } = axios.post("http://localhost:8000/posts", obj);
@@ -47,85 +45,87 @@ export default function NewPost({ visible, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 min-h-screen flex ">
-      <div className="container max-w-sm mx-auto flex-1 w-screen md:flex hidden items-center justify-between px-2">
-        <div className="bg-yellow-100 px-6 py-8 rounded shadow-md text-black w-full h-5/6">
-          <h2 className="text-center">Demo</h2>
-          <p>{post.title}</p>
-          <div style={{ width: "100%", height: "200px" }}>
+    <div className="text-right">
+      <div
+        className="w-full md:w-3/4 m-auto flex flex-col md:p-20 p-10 h-4/6 mt-10 mb-40"
+        style={{ fontFamily: "Rubik, sans-serif" }}
+      >
+        <div
+          className=" px-6 py-8 rounded shadow-md text-black w-full"
+          style={{ backgroundColor: "#E0D6D4" }}
+        >
+          <h2 className="text-center text-5xl my-5 font-bold">הוספת מתכון</h2>
+          <input
+            type="text"
+            className="block border border-grey-light w-full p-3 rounded mb-4 text-right"
+            placeholder="שם מתכון"
+            name="title"
+            onChange={handleInput}
+          />
+
+          <p className="my-2">{post.title}</p>
+          <div className="md:flex md:justify-between">
+            <input
+              className="block text-right w-full md:w-3/4  text-sm text-gray-900 bg-gray-50 rounded-lg border "
+              type="file"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <button onClick={() => uploadImg()}>לחץ לאחר בחירת הקובץ</button>
+          </div>
+          <div className="my-6 mx-auto" style={{ width: "80%", height: "200px"}}>
             <img
               style={{ width: "100%", height: "100%" }}
               src={`./upload/${post.img}`}
               className="w-full h-full"
             />
           </div>
-          <p>{post.description}</p>
-          <ul>
+
+          <textarea
+            className="block text-right border border-grey-light w-full p-3 rounded mb-4"
+            placeholder="תיאור"
+            name="description"
+            onChange={handleInput}
+          />
+          <p className="my-2">{post.description}</p>
+
+          <div className="flex justify-between">
+            <button className="underline" onClick={() => getIngredients()}>
+              הוסף
+            </button>
+            <input
+              type={"text"}
+              className="block text-right border border-grey-light w-3/4 p-3 rounded mb-4"
+              placeholder="לאחר כל שורת מצרכים לחץ על הוסף"
+              name="recipe"
+              onChange={getInput}
+            />
+          </div>
+
+          <ul className="my-2">
             {post.recipe.map((ingredient, i) => (
               <li key={i}>{ingredient}</li>
             ))}
           </ul>
-        </div>
-      </div>
-
-      <div className="container max-w-sm mx-auto flex-1 w-screen flex items-center justify-between px-2">
-        <div
-          className=" px-6 py-8 rounded shadow-md text-black w-full"
-          style={{ backgroundColor: "#E0D6D4" }}
-        >
-          <h2 className="text-center">New Recipe</h2>
-          <input
-            type="text"
-            className="block border border-grey-light w-full p-3 rounded mb-4"
-            placeholder="Name"
-            name="title"
-            onChange={handleInput}
-          />
-
-          <label
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            htmlFor="user_avatar"
-          >
-            Upload Image
-          </label>
-          <input
-            className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            type="file"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-          <button onClick={() => uploadImg()}>Upload</button>
 
           <textarea
-            className="block border border-grey-light w-full p-3 rounded mb-4"
-            placeholder="Description"
-            name="description"
+            className="block border text-right border-grey-light w-full p-3 rounded mb-4"
+            placeholder="אופן הכנה"
+            name="preparation"
             onChange={handleInput}
           />
-          <div className="flex">
-            <input
-              type={"text"}
-              className="block border border-grey-light w-full p-3 rounded mb-4"
-              placeholder="Ingredients"
-              name="recipe"
-              onChange={getInput}
-            />
-            <button onClick={() => getIngredients()}>add</button>
-          </div>
+          <p className="my-2">{post.preparation}</p>
           <input
             type="text"
-            className="block border border-grey-light w-full p-3 rounded mb-4"
-            placeholder="Time"
+            className="block text-right border border-grey-light w-full p-3 rounded mb-4"
+            placeholder="זמן הכנה"
             name="time"
             onChange={handleInput}
           />
+          <p className="my-2">{post.time}</p>
 
-          <button onClick={() => addPost(post)}>Add</button>
-          <button
-            className="inline-block px-6 py-2 underline font-medium text-xs leading-tight uppercase focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-            onClick={onClose}
-          >
-            back
-          </button>
+          <button className="text-lg hover:underline" onClick={() =>{ addPost(post)
+          navigate("/profile")
+          }}> הוסף מתכון</button>
         </div>
       </div>
     </div>

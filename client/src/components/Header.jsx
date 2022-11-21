@@ -79,7 +79,6 @@ export default function Header() {
           להירשם ולחלוק איתנו את המתכונים המנצחים שלכם
         </p>
       </div>
-      {/* <Link to={}>כל המתכונים</Link> */}
       <Login visible={showLogIn} onClose={handleOnCloseLogIn} />
       <SignUP visible={showSignUp} onClose={handleOnCloseSignUp} />
     </>

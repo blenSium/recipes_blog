@@ -62,7 +62,7 @@ export default function PostsFeed() {
         { 
           filteredRecipes()?.map((post) => (
             <div key={post._id} className="">
-              <RecipeCard recipe={post}/>
+              <RecipeCard recipe={post} profile={'no'}/>
             </div>
           ))}
       </div>

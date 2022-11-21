@@ -7,6 +7,7 @@ import PostsFeed from './components/PostsFeed'
 import Courses from './components/Courses';
 import RecipePage from './components/RecipePage';
 import Footer from './components/Footer'
+import NewPost from './components/NewPost';
 
 
 
@@ -23,6 +24,7 @@ export default function App() {
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/:id' element={<UserProfile/>}/>
         <Route path='/recipe/:id' element={<RecipePage/>}/>
+        <Route path='/newPost' element={<NewPost/>}/>
       </Routes>
       <Footer/>
     </div>

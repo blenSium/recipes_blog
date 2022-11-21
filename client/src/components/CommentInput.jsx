@@ -3,9 +3,8 @@ import React, { useState } from "react";
 
 
 export default function CommentInput({userId, postId}) {
-
-    const[comment,setComment] = useState({userId: userId, postId: postId})
     const userName = sessionStorage.getItem("userName")
+    const[comment,setComment] = useState({userName: userName, postId: postId})
 
     const addComment = async(obj) =>{
         const {data} = await axios.post('http://localhost:8000/comments',obj);

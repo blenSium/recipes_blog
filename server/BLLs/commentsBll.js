@@ -15,7 +15,7 @@ const getCommentById = (id) => {
   const addComment = async (obj) => {
     try {
       const newComment = commentsModel({
-        userId: obj.userId,
+        userName: obj.userName,
         postId: obj.postId,
         content: obj.content,
       });
