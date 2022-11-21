@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Nav from "./Nav";
 import CommentInput from "./CommentInput";
+import CommentsSection from "./CommentsSection";
+
 
 export default function RecipePage() {
   const [post, setPost] = useState({});
@@ -12,6 +14,8 @@ export default function RecipePage() {
   const [alert, setAlert] = useState("none");
   const [comment, setComment] = useState("none");
   const userId = sessionStorage.getItem("userId");
+  const navigate = useNavigate()
+
 
   const getPost = async () => {
     const { data } = await axios.get(`http://localhost:8000/posts/${id}`);
@@ -19,14 +23,20 @@ export default function RecipePage() {
     setRecipes(data.recipe);
   };
 
-  const getUser = async (userId) => {
-    const { data } = await axios.get(`http://localhost:8000/users/${userId}`);
-    setUser(data);
+  const getUser = async () => {
+    if(post.userId){
+      const { data } = await axios.get(`http://localhost:8000/users/${post.userId}`);
+      setUser(data);
+    }else{
+      console.log('no')
+    }
   };
 
   useEffect(() => {
     getPost();
-  }, []);
+    getUser()
+  }, [post]);
+
 
   const addComment = () => {
     if (userId) {
@@ -43,6 +53,7 @@ export default function RecipePage() {
         className="w-full md:w-3/4 m-auto flex flex-col md:p-20 p-10 shadow-lg h-4/6 mt-10 mb-40"
         style={{ backgroundColor: "#E0D6D4", fontFamily: "Rubik, sans-serif" }}
       >
+        <button className="font-bold text-center hover:underline" onClick={()=>navigate(`/${user._id}`)}>{user.fullName}</button>
         <h1 className="text-center text-6xl">{post.title}</h1>
         <p className="text-center my-5">{post.description}</p>
         <img
@@ -104,8 +115,9 @@ export default function RecipePage() {
         </div>
       </div>
         <div style={{display:`${comment}`}}>
-        <CommentInput/>
+        <CommentInput userId={userId} postId={id}/>
         </div>
+        <CommentsSection postId={id}/>
     </div>
   );
 }

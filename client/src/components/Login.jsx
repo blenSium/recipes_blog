@@ -28,6 +28,7 @@ export default function Login({ visible, onClose }) {
       } else {
         console.log(data.fullName);
         window.sessionStorage.setItem("userId",data._id)
+        window.sessionStorage.setItem("userName",data.fullName)
         onClose()
       }
     });
