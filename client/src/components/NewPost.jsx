@@ -2,12 +2,13 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 
-
 export default function NewPost({ visible, onClose }) {
   const userId = sessionStorage.getItem("userId");
   const [file, setFile] = useState(null);
   const [imgUrl, setImgUrl] = useState("");
-  const [post, setPost] = useState({ userId: userId });
+  const [ingredient, setIngredients] = useState([]);
+  const [input, setInput] = useState("");
+  const [post, setPost] = useState({ userId: userId, recipe: ingredient });
   if (!visible) return null;
 
   const uploadImg = async () => {
@@ -19,7 +20,6 @@ export default function NewPost({ visible, onClose }) {
         formData
       );
       console.log("uploadImg");
-      console.log(data);
       setImgUrl(data);
       console.log(imgUrl);
     } catch (err) {
@@ -27,11 +27,19 @@ export default function NewPost({ visible, onClose }) {
     }
   };
 
+  const getInput = (e) => {
+    setInput(e.target.value);
+  };
+
+  const getIngredients = () => {
+    ingredient.push(input);
+    console.log(ingredient);
+  };
+
   const handleInput = async (e) => {
     e.preventDefault();
-    // const imgUrl =await uploadImg()
     setPost({ ...post, [e.target.name]: e.target.value, img: imgUrl });
-    // console.log(post)
+    console.log(post);
   };
   const addPost = async (obj) => {
     const { data } = axios.post("http://localhost:8000/posts", obj);
@@ -39,13 +47,41 @@ export default function NewPost({ visible, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 min-h-screen flex flex-col">
-      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+    <div className="fixed inset-0 bg-black bg-opacity-70 min-h-screen flex ">
+      <div className="container max-w-sm mx-auto flex-1 w-screen md:flex hidden items-center justify-between px-2">
+        <div className="bg-yellow-100 px-6 py-8 rounded shadow-md text-black w-full h-5/6">
+          <h2 className="text-center">Demo</h2>
+          <p>{post.title}</p>
+          <div style={{ width: "100%", height: "200px" }}>
+            <img
+              style={{ width: "100%", height: "100%" }}
+              src={`./upload/${post.img}`}
+              className="w-full h-full"
+            />
+          </div>
+          <p>{post.description}</p>
+          <ul>
+            {post.recipe.map((ingredient, i) => (
+              <li key={i}>{ingredient}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div className="container max-w-sm mx-auto flex-1 w-screen flex items-center justify-between px-2">
         <div
           className=" px-6 py-8 rounded shadow-md text-black w-full"
           style={{ backgroundColor: "#E0D6D4" }}
         >
           <h2 className="text-center">New Recipe</h2>
+          <input
+            type="text"
+            className="block border border-grey-light w-full p-3 rounded mb-4"
+            placeholder="Name"
+            name="title"
+            onChange={handleInput}
+          />
+
           <label
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
             htmlFor="user_avatar"
@@ -59,26 +95,22 @@ export default function NewPost({ visible, onClose }) {
           />
           <button onClick={() => uploadImg()}>Upload</button>
 
-          <input
-            type="text"
-            className="block border border-grey-light w-full p-3 rounded mb-4"
-            placeholder="Name"
-            name="title"
-            onChange={handleInput}
-          />
-
           <textarea
             className="block border border-grey-light w-full p-3 rounded mb-4"
             placeholder="Description"
             name="description"
             onChange={handleInput}
           />
-          <textarea
-            className="block border border-grey-light w-full p-3 rounded mb-4"
-            placeholder="Recipe"
-            name="recipe"
-            onChange={handleInput}
-          />
+          <div className="flex">
+            <input
+              type={"text"}
+              className="block border border-grey-light w-full p-3 rounded mb-4"
+              placeholder="Ingredients"
+              name="recipe"
+              onChange={getInput}
+            />
+            <button onClick={() => getIngredients()}>add</button>
+          </div>
           <input
             type="text"
             className="block border border-grey-light w-full p-3 rounded mb-4"

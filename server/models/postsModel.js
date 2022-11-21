@@ -5,7 +5,8 @@ const {Schema} = mongoose
 const postSchema = new Schema({
     title:String,
     description:String,
-    recipe:String,
+    recipe:[String],
+    preparation:String,
     img:String,
     time:String,
     userId:String

@@ -39,11 +39,11 @@ export default function Profile() {
       <div className="bg-pink-200 w-64 p-2">
         <h1 className="text-center font-bold text-5xl" style={{fontFamily:'Lobster'}}>{user.fullName}</h1>
       </div>
-      <div className="flex justify-center items-center mb-10">
+      <div className="flex flex-col justify-center items-center mb-10">
         <p className="text-center text-4xl" style={{fontFamily:'Lobster'}}>My Recipes</p>
         <button
           type="button"
-          className="py-2 px-5 mx-4 pb-7 h-8 text-sm font-medium text-gray-900 focus:outline-none bg-pink-100 rounded-lg border border-gray-200 hover:bg-pink-200 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+          className="py-2 px-5 mx-4 pb-7  text-lg underline font-medium hover:text-pink-400"
           onClick={() => setShowNewPost(true)}
         >
           New Post

@@ -7,7 +7,6 @@ import RecipeCard from "./RecipeCard";
 export default function PostsFeed() {
   const [posts, setPosts] = useState([]);
   const [input, setInput] = useState("");
-  const [display, setDisplay] = useState("none");
 
   useEffect(() => {
     const getPosts = async () => {
@@ -15,7 +14,7 @@ export default function PostsFeed() {
       setPosts(data);
     };
     getPosts();
-  }, []);
+  }, [posts]);
 
   const filteredRecipes = () => {
    const array= posts.filter((post) => {

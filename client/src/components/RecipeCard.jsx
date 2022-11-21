@@ -1,96 +1,36 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
+import React from "react";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import axios from 'axios'
-import {Link} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-
-export default function RecipeCard({recipe}) {
-  const [expanded, setExpanded] = React.useState(false);
-  const [user, setUser] = React.useState({});
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-const getUser = async()=>{
-  const {data} = await axios.get(`http://localhost:8000/users/${recipe.userId}`)
-  setUser(data)
-}
-
-React.useEffect(()=>{
-  getUser()
-},[])
+export default function RecipeCard({ recipe }) {
+  const navigate = useNavigate();
 
   return (
-    <Card sx={{ maxWidth: 345 }} style={{marginBottom:'20px', width:'345px'}}>
-      <CardHeader
-        title={recipe.title}
-        subheader={recipe.createdAt}
-      />
+    <Card sx={{ maxWidth: 345 }} className="mb-16" style={{ height: "470px" }}>
       <CardMedia
         component="img"
-        style={{height:"300px"}} 
-        image={`./upload/${recipe.img}`}
         alt="dish"
+        style={{ height: "300px", width: "400px" }}
+        image={`./upload/${recipe.img}`}
       />
-      <CardContent>
+      <CardContent className="text-right">
+        <Typography gutterBottom variant="h5" component="div">
+          {recipe.title}
+        </Typography>
         <Typography variant="body2" color="text.secondary">
           {recipe.description}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
+      <CardActions>
+        <Button size="medium" onClick={() => navigate(`/recipe/${recipe._id}`)}>
+          למתכון המלא
+        </Button>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>
-            Time: {recipe.time}
-          </Typography>
-          <Typography paragraph>Recipe:</Typography>
-          <Typography paragraph style={{width:"100%"}}>
-            {recipe.recipe}
-          </Typography>
-          <Link to={`/${user._id}`} style={{width:"100%"}} className="underline hover:text-blue-400">
-            {user.fullName}
-          </Link>
-        </CardContent>
-      </Collapse>
     </Card>
   );
 }
-
