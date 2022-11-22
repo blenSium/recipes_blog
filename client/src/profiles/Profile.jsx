@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import RecipeCard from "./RecipeCard";
-import Nav from "./Nav";
+import RecipeCard from "../components/RecipeCard";
 import { useNavigate } from "react-router-dom";
 
 
@@ -33,7 +32,6 @@ const navigate = useNavigate()
 
   return (
     <div style={{minHeight:'600px'}}>
-      {/* <Nav/> */}
       <div className="bg-pink-200 w-64 p-2">
         <h1 className="text-center font-bold text-5xl" style={{fontFamily:'Lobster'}}>{user.fullName}</h1>
       </div>

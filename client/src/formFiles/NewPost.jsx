@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ export default function NewPost() {
   const [ingredient, setIngredients] = useState([]);
   const [input, setInput] = useState("");
   const [post, setPost] = useState({ userId: userId, recipe: ingredient });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const uploadImg = async () => {
     try {
@@ -32,17 +32,22 @@ export default function NewPost() {
   };
 
   const getIngredients = () => {
-    ingredient.push(input);
+    setIngredients([...ingredient , input])
   };
 
   const handleInput = async (e) => {
-    e.preventDefault();
-    setPost({ ...post, [e.target.name]: e.target.value, img: imgUrl });
+    setPost({
+      ...post,
+      [e.target.name]: e.target.value,
+      img: imgUrl,
+    });
   };
+
   const addPost = async (obj) => {
     const { data } = axios.post("http://localhost:8000/posts", obj);
     return data;
   };
+
 
   return (
     <div className="text-right">
@@ -72,10 +77,13 @@ export default function NewPost() {
             />
             <button onClick={() => uploadImg()}>לחץ לאחר בחירת הקובץ</button>
           </div>
-          <div className="my-6 mx-auto" style={{ width: "80%", height: "200px"}}>
+          <div
+            className="my-6 mx-auto"
+            style={{ width: "80%", height: "200px" }}
+          >
             <img
               style={{ width: "100%", height: "100%" }}
-              src={`./upload/${post.img}`}
+              src={`./upload/${imgUrl}`}
               className="w-full h-full"
             />
           </div>
@@ -88,8 +96,8 @@ export default function NewPost() {
           />
           <p className="my-2">{post.description}</p>
 
-          <div className="flex justify-between">
-            <button className="underline" onClick={() => getIngredients()}>
+          <div className="flex">
+            <button className="underline mx-4" onClick={() => getIngredients()}>
               הוסף
             </button>
             <input
@@ -102,7 +110,7 @@ export default function NewPost() {
           </div>
 
           <ul className="my-2">
-            {post.recipe.map((ingredient, i) => (
+            {ingredient.map((ingredient, i) => (
               <li key={i}>{ingredient}</li>
             ))}
           </ul>
@@ -123,9 +131,16 @@ export default function NewPost() {
           />
           <p className="my-2">{post.time}</p>
 
-          <button className="text-lg hover:underline" onClick={() =>{ addPost(post)
-          navigate("/profile")
-          }}> הוסף מתכון</button>
+          <button
+            className="text-lg hover:underline"
+            onClick={() => {
+              addPost(post);
+              navigate("/profile");
+            }}
+          >
+            {" "}
+            הוסף מתכון
+          </button>
         </div>
       </div>
     </div>

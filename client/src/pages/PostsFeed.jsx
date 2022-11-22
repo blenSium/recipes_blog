@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import RecipeCard from "./RecipeCard";
+import RecipeCard from "../components/RecipeCard";
 
 
 export default function PostsFeed() {

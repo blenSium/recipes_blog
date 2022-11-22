@@ -1,13 +1,13 @@
 import React from 'react'
-import Blog from './components/Blog'
+import Blog from './pages/Blog'
 import { Routes, Route } from "react-router-dom";
-import Profile from './components/Profile'
-import UserProfile from './components/UserProfile';
-import PostsFeed from './components/PostsFeed'
-import Courses from './components/Courses';
-import RecipePage from './components/RecipePage';
+import Profile from './profiles/Profile'
+import UserProfile from './profiles/UserProfile';
+import PostsFeed from './pages/PostsFeed'
+import Courses from './pages/Courses';
+import RecipePage from './pages/RecipePage';
 import Footer from './components/Footer'
-import NewPost from './components/NewPost';
+import NewPost from './formFiles/NewPost';
 import NavBar from './components/NavBar';
 
 

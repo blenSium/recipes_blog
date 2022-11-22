@@ -12,19 +12,17 @@ import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
 import axios from "axios";
-import EditPost from "./EditPost";
+import EditPost from "../formFiles/EditPost";
 
 const options = ["עריכה", "מחיקה"];
 
-
-export default function RecipeCard({ recipe , profile }) {
+export default function RecipeCard({ recipe, profile }) {
   const navigate = useNavigate();
   const [showEdit, setShowEdit] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const handleOnCloseEdit = () => setShowEdit(false);
-
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,33 +32,47 @@ export default function RecipeCard({ recipe , profile }) {
     setAnchorEl(null);
   };
 
-const deletePost = async(id) =>{
-  const {data } = axios.delete(`http://localhost:8000/posts/${id}` , id)
-  return data
-}
+  const deletePost = async (id) => {
+    const { data } = axios.delete(`http://localhost:8000/posts/${id}`, id);
+    return data;
+  };
+  const scroll = () => {
+    window.scroll({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <div>
-    <Card sx={{ maxWidth: 345 }} className="mb-16" style={{ height: "470px" }}>
-      <CardMedia
-        component="img"
-        alt="dish"
-        style={{ height: "300px", width: "400px" }}
-        image={`./upload/${recipe.img}`}
-      />
-      <CardContent className="text-right">
-        <Typography gutterBottom variant="h5" component="div">
-          {recipe.title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {recipe.description}
-        </Typography>
-      </CardContent>
-      <CardActions className="flex justify-between">
-        <Button size="medium" onClick={() => navigate(`/recipe/${recipe._id}`)}>
-          למתכון המלא
-        </Button>
-       {profile == 'yes'? <div className="flex justify-between w-1/4">
+      <Card
+        sx={{ maxWidth: 345 }}
+        className="mb-16"
+        style={{ height: "470px" }}
+      >
+        <CardMedia
+          component="img"
+          alt="dish"
+          style={{ height: "300px", width: "400px" }}
+          image={`./upload/${recipe.img}`}
+        />
+        <CardContent className="text-right">
+          <Typography gutterBottom variant="h5" component="div">
+            {recipe.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {recipe.description}
+          </Typography>
+        </CardContent>
+        <CardActions className="flex justify-between">
+          <Button
+            size="medium"
+            onClick={() => {
+              navigate(`/recipe/${recipe._id}`);
+              scroll();
+            }}
+          >
+            למתכון המלא
+          </Button>
+          {profile == "yes" ? (
+            <div className="flex justify-between w-1/4">
               <IconButton
                 aria-label="more"
                 id="long-button"
@@ -85,23 +97,25 @@ const deletePost = async(id) =>{
                   },
                 }}
               >
-                  <MenuItem
-                    key={options[0]}
-                    onClick={()=>setShowEdit(true)}
-                  >
-                    {options[0]}
-                  </MenuItem>
-                  <MenuItem
-                    key={options[1]}
-                    onClick={()=> deletePost(recipe._id)}
-                  >
-                    {options[1]}
-                  </MenuItem>
+                <MenuItem key={options[0]} onClick={() => setShowEdit(true)}>
+                  {options[0]}
+                </MenuItem>
+                <MenuItem
+                  key={options[1]}
+                  onClick={() => deletePost(recipe._id)}
+                >
+                  {options[1]}
+                </MenuItem>
               </Menu>
-            </div>: null}
-      </CardActions>
-    </Card>
-      <EditPost visible={showEdit} onClose={handleOnCloseEdit} postId={recipe._id}/>
+            </div>
+          ) : null}
+        </CardActions>
+      </Card>
+      <EditPost
+        visible={showEdit}
+        onClose={handleOnCloseEdit}
+        postId={recipe._id}
+      />
     </div>
   );
 }

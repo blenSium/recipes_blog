@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import Details from "./Details";
+import Details from "../formFiles/Details";
 
 export default function Courses() {
   const [courses, setCourses] = useState([]);

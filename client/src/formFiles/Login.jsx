@@ -39,7 +39,7 @@ export default function Login({ visible, onClose }) {
       <div className="fixed inset-0 bg-black bg-opacity-70 min-h-screen flex flex-col">
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-            <img src={cookItLogo} alt="logo" />
+            <img src={cookItLogo} width={"50%"} className="m-auto mb-5" alt="logo" />
             <input
               type="email"
               className="block border border-grey-light w-full p-3 rounded mb-4"

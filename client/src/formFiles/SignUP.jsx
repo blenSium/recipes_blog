@@ -24,7 +24,7 @@ export default function SignUP({ visible, onClose }) {
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 h-1/4">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
             <div className="sm:text-3xl text-2xl font-semibold mb-8">
-              <img src={cookItLogo} alt="logo" />
+              <img src={cookItLogo} width={"40%"} alt="logo" className="m-auto"/>
             </div>
             <div className="">
               <div>
@@ -64,7 +64,7 @@ export default function SignUP({ visible, onClose }) {
                 </button>
               </div>
               <div>
-                <p style={{display:display}} className='text-lg text-green-600 font-bold text-center'>Welcome...Now log in and start cooking </p>
+                <p style={{display:display}} className='text-lg text-pink-600 font-bold text-center'>Welcome...Now log in and start cooking </p>
               </div>
               <div className="flex justify-between">
                 <button

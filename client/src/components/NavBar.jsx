@@ -11,8 +11,8 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import cookItLogo from "../assets/cookit_logo.png";
 import { useNavigate } from "react-router-dom";
-import SignUP from "./SignUP";
-import Login from "./Login";
+import SignUP from "../formFiles/SignUP";
+import Login from "../formFiles/Login";
 
 export default function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -90,7 +90,7 @@ export default function NavBar() {
                   <MenuItem
                     onClick={() => {
                       sessionStorage.clear();
-                      window.location.reload();
+                      navigate("/");
                     }}
                   >
                     <Typography textAlign="center" style={{ color: "#FCA2AD" }}>
@@ -152,7 +152,7 @@ export default function NavBar() {
                     style={{ color: "#FCA2AD" }}
                     onClick={() => {
                       sessionStorage.clear();
-                      window.location.reload();
+                      navigate("/");
                     }}
                     sx={{ my: 2, display: "block" }}
                   >

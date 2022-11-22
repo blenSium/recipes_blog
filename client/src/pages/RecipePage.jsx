@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import CommentInput from "./CommentInput";
-import CommentsSection from "./CommentsSection";
+import CommentInput from "../components/CommentInput";
+import CommentsSection from "../components/CommentsSection";
 
 
 export default function RecipePage() {
