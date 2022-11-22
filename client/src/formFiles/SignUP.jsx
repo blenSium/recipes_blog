@@ -13,7 +13,7 @@ export default function SignUP({ visible, onClose }) {
   }
 
   const addUser = async (newUser) => {
-    const { data } = await axios.post("http://localhost:8000/users", newUser);
+    const { data } = await axios.post("https://tame-lime-haddock-robe.cyclic.app/users", newUser);
     setDisplay('block')
     return data;
   };

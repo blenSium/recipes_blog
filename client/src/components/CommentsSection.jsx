@@ -24,7 +24,7 @@ export default function CommentsSection({ postId }) {
 
   const getPostsComments = async () => {
     const { data } = await axios.get(
-      `http://localhost:8000/comments?postId=${postId}`
+      `https://tame-lime-haddock-robe.cyclic.app/comments?postId=${postId}`
     );
     setComments(data);
   };

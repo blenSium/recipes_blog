@@ -33,7 +33,7 @@ export default function RecipeCard({ recipe, profile }) {
   };
 
   const deletePost = async (id) => {
-    const { data } = axios.delete(`http://localhost:8000/posts/${id}`, id);
+    const { data } = axios.delete(`https://tame-lime-haddock-robe.cyclic.app/posts/${id}`, id);
     return data;
   };
   const scroll = () => {

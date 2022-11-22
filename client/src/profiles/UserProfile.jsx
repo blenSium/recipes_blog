@@ -11,12 +11,12 @@ export default function UserProfile() {
 
   const getUsersPosts = async () => {
     const { data } = await axios.get(
-      `http://localhost:8000/posts?userId=${id}`
+      `https://tame-lime-haddock-robe.cyclic.app/posts?userId=${id}`
     );
     setUsersPosts(data);
   };
   const getUser = async () => {
-    const { data } = await axios.get(`http://localhost:8000/users/${id}`);
+    const { data } = await axios.get(`https://tame-lime-haddock-robe.cyclic.app/users/${id}`);
     setUser(data);
     console.log(data);
   };

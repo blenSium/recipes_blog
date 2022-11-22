@@ -10,7 +10,7 @@ export default function EditPost({ postId, visible, onClose }) {
 
   const updatePost = async (obj) => {
     const { data } = await axios.put(
-      `http://localhost:8000/posts/${postId}`,
+      `https://tame-lime-haddock-robe.cyclic.app/posts/${postId}`,
       obj
     );
     return data;
@@ -21,7 +21,7 @@ export default function EditPost({ postId, visible, onClose }) {
       const formData = new FormData();
       formData.append("file", file);
       const { data } = await axios.post(
-        "http://localhost:8000/upload",
+        "https://tame-lime-haddock-robe.cyclic.app/upload",
         formData
       );
       setUpdated({ [select]: data });

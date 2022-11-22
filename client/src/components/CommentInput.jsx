@@ -7,7 +7,7 @@ export default function CommentInput({userId, postId}) {
     const[comment,setComment] = useState({userName: userName, postId: postId})
 
     const addComment = async(obj) =>{
-        const {data} = await axios.post('http://localhost:8000/comments',obj);
+        const {data} = await axios.post('https://tame-lime-haddock-robe.cyclic.app/comments',obj);
         return data
     }
 

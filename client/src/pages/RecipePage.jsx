@@ -17,14 +17,14 @@ export default function RecipePage() {
 
 
   const getPost = async () => {
-    const { data } = await axios.get(`http://localhost:8000/posts/${id}`);
+    const { data } = await axios.get(`https://tame-lime-haddock-robe.cyclic.app/posts/${id}`);
     setPost(data);
     setRecipes(data.recipe);
   };
 
   const getUser = async () => {
     if(post.userId){
-      const { data } = await axios.get(`http://localhost:8000/users/${post.userId}`);
+      const { data } = await axios.get(`https://tame-lime-haddock-robe.cyclic.app/users/${post.userId}`);
       setUser(data);
     }
   };

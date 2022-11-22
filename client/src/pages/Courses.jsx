@@ -9,7 +9,7 @@ export default function Courses() {
   const handleOnClose = () => setShowDetails(false);
 
   const getAllCourses = async () => {
-    const { data } = await axios.get("http://localhost:8000/courses");
+    const { data } = await axios.get("https://tame-lime-haddock-robe.cyclic.app/courses");
     setCourses(data);
   };
 

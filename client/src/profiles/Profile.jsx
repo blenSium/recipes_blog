@@ -15,12 +15,12 @@ const navigate = useNavigate()
 
   const getUsersPosts = async () => {
     const { data } = await axios.get(
-      `http://localhost:8000/posts?userId=${userId}`
+      `https://tame-lime-haddock-robe.cyclic.app/posts?userId=${userId}`
     );
     setUsersPosts(data);
   };
   const getUser = async () => {
-    const { data } = await axios.get(`http://localhost:8000/users/${userId}`);
+    const { data } = await axios.get(`https://tame-lime-haddock-robe.cyclic.app/users/${userId}`);
     setUser(data);
   };
 
