@@ -13,7 +13,6 @@ export default function CommentInput({userId, postId}) {
 
     const handleInput = (e)=>{
         setComment({...comment, [e.target.name]: e.target.value})
-        console.log(comment)
     }
 
 

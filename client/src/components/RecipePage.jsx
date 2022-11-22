@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Nav from "./Nav";
 import CommentInput from "./CommentInput";
 import CommentsSection from "./CommentsSection";
 
@@ -27,8 +26,6 @@ export default function RecipePage() {
     if(post.userId){
       const { data } = await axios.get(`http://localhost:8000/users/${post.userId}`);
       setUser(data);
-    }else{
-      console.log('no')
     }
   };
 
@@ -48,7 +45,6 @@ export default function RecipePage() {
 
   return (
     <div>
-      <Nav />
       <div
         className="w-full md:w-3/4 m-auto flex flex-col md:p-20 p-10 shadow-lg h-4/6 mt-10 mb-40"
         style={{ backgroundColor: "#E0D6D4", fontFamily: "Rubik, sans-serif" }}

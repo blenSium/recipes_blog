@@ -8,6 +8,7 @@ import Courses from './components/Courses';
 import RecipePage from './components/RecipePage';
 import Footer from './components/Footer'
 import NewPost from './components/NewPost';
+import NavBar from './components/NavBar';
 
 
 
@@ -16,6 +17,7 @@ import NewPost from './components/NewPost';
 export default function App() {
   return (
     <div>
+      <NavBar/>
       <Routes>
         <Route path='/' element={<Blog/>}>
           <Route path='/feed' element={<PostsFeed/>}/>

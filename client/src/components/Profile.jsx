@@ -23,7 +23,6 @@ const navigate = useNavigate()
   const getUser = async () => {
     const { data } = await axios.get(`http://localhost:8000/users/${userId}`);
     setUser(data);
-    console.log(data)
   };
 
   useEffect(() => {
@@ -34,7 +33,7 @@ const navigate = useNavigate()
 
   return (
     <div style={{minHeight:'600px'}}>
-      <Nav/>
+      {/* <Nav/> */}
       <div className="bg-pink-200 w-64 p-2">
         <h1 className="text-center font-bold text-5xl" style={{fontFamily:'Lobster'}}>{user.fullName}</h1>
       </div>
