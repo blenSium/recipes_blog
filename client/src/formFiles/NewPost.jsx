@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toBase64 } from "../utils.js";
 
 export default function NewPost() {
   const userId = sessionStorage.getItem("userId");
@@ -10,15 +11,6 @@ export default function NewPost() {
   const [input, setInput] = useState("");
   const [post, setPost] = useState({ userId: userId, recipe: ingredient });
   const navigate = useNavigate();
-
-
-  const toBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
 
   const getInput = (e) => {
     setInput(e.target.value);
@@ -41,6 +33,7 @@ export default function NewPost() {
       "https://tame-lime-haddock-robe.cyclic.app/posts",
       obj
     );
+    console.log(data)
     return data;
   };
 
