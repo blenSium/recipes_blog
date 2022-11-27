@@ -51,7 +51,7 @@ export default function RecipeCard({ recipe, profile }) {
           component="img"
           alt="dish"
           style={{ height: "300px", width: "400px" }}
-          image={`./upload/${recipe.img}`}
+          image={recipe.img}
         />
         <CardContent className="text-right">
           <Typography gutterBottom variant="h5" component="div">

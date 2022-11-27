@@ -6,48 +6,43 @@ import { useNavigate } from "react-router-dom";
 export default function NewPost() {
   const userId = sessionStorage.getItem("userId");
   const [file, setFile] = useState(null);
-  const [imgUrl, setImgUrl] = useState("");
   const [ingredient, setIngredients] = useState([]);
   const [input, setInput] = useState("");
   const [post, setPost] = useState({ userId: userId, recipe: ingredient });
   const navigate = useNavigate();
 
-  const uploadImg = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const { data } = await axios.post(
-        "https://tame-lime-haddock-robe.cyclic.app/upload",
-        formData
-      );
-      console.log("uploadImg");
-      setImgUrl(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
 
   const getInput = (e) => {
     setInput(e.target.value);
   };
 
   const getIngredients = () => {
-    setIngredients([...ingredient , input])
+    setIngredients([...ingredient, input]);
   };
 
   const handleInput = async (e) => {
     setPost({
       ...post,
       [e.target.name]: e.target.value,
-      img: imgUrl,
+      img: file,
     });
   };
 
   const addPost = async (obj) => {
-    const { data } = axios.post("https://tame-lime-haddock-robe.cyclic.app/posts", obj);
+    const { data } = axios.post(
+      "https://tame-lime-haddock-robe.cyclic.app/posts",
+      obj
+    );
     return data;
   };
-
 
   return (
     <div className="text-right">
@@ -73,9 +68,11 @@ export default function NewPost() {
             <input
               className="block text-right w-full md:w-3/4  text-sm text-gray-900 bg-gray-50 rounded-lg border "
               type="file"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={async(e) => {
+                setFile(await toBase64(e.target.files[0])
+                );
+              }}
             />
-            <button onClick={() => uploadImg()}>לחץ לאחר בחירת הקובץ</button>
           </div>
           <div
             className="my-6 mx-auto"
@@ -83,7 +80,7 @@ export default function NewPost() {
           >
             <img
               style={{ width: "100%", height: "100%" }}
-              src={`./upload/${imgUrl}`}
+              src={file}
               className="w-full h-full"
             />
           </div>

@@ -3,31 +3,30 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
 
-
 export default function PostsFeed() {
   const [posts, setPosts] = useState([]);
   const [input, setInput] = useState("");
 
   useEffect(() => {
     const getPosts = async () => {
-      const { data } = await axios.get("https://tame-lime-haddock-robe.cyclic.app/posts");
+      const { data } = await axios.get("http://localhost:8000/posts");
       setPosts(data);
     };
     getPosts();
   }, [posts]);
 
   const filteredRecipes = () => {
-   const array= posts.filter((post) => {
-      if (post.title.includes(input)) {
-         return post; }
-     })
-     if(array.length<=0){
-      return posts
-     }
-     else{
-      return array
-     }
-    };
+    const array = posts.filter((post) => {
+      if (post.title?.includes(input)) {
+        return post;
+      }
+    });
+    if (array.length <= 0) {
+      return posts;
+    } else {
+      return array;
+    }
+  };
 
   return (
     <div className="mt-20">
@@ -59,12 +58,11 @@ export default function PostsFeed() {
         />
       </div>
       <div className="m-auto flex flex-wrap justify-around">
-        { 
-          filteredRecipes()?.map((post) => (
-            <div key={post._id} className="">
-              <RecipeCard recipe={post} profile={'no'}/>
-            </div>
-          ))}
+        {filteredRecipes()?.map((post) => (
+          <div key={post._id} className="">
+            <RecipeCard recipe={post} profile={"no"} />
+          </div>
+        ))}
       </div>
     </div>
   );
