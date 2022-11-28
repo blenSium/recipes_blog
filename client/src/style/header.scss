@@ -20,7 +20,17 @@
 
 @media screen and(max-width: 600px){
    .header{
-      background: url('../assets/‏‏background-mobile.png') no-repeat cover;
+      background: url('../assets/background-header.png') no-repeat;
+      background-size: 500px;
       background-position: center;
+      min-height: 300px;
    } 
+   .about{
+      font-size: 35px;
+      }
+   .about-me{
+      font-size: 20px;
+   
+   }
+   
 }
