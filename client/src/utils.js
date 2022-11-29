@@ -8,7 +8,7 @@ new Promise((resolve, reject) => {
 });
 
 export const getUser = async (userId, set) => {
-    const { data } = await axios.get(`http://localhost:8000/users/${userId}`);
+    const { data } = await axios.get(`https://tame-lime-haddock-robe.cyclic.app/users/${userId}`);
     set(data);
   };
 
