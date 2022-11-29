@@ -17,7 +17,7 @@ export default function RecipePage() {
 
 
   const getPostRecipe = async () => {
-    const { data } = await axios.get(`http://localhost:8000/posts/${id}`);
+    const { data } = await axios.get(`https://tame-lime-haddock-robe.cyclic.app/posts/${id}`);
     setPost(data);
     setRecipes(data.recipe);
   };
