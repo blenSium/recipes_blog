@@ -9,7 +9,7 @@ export default function PostsFeed() {
 
   useEffect(() => {
     const getPosts = async () => {
-      const { data } = await axios.get("http://localhost:8000/posts");
+      const { data } = await axios.get("https://tame-lime-haddock-robe.cyclic.app/posts");
       setPosts(data);
     };
     getPosts();

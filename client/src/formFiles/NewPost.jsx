@@ -17,7 +17,7 @@ export default function NewPost() {
       const formData = new FormData();
       formData.append("file", file);
       const { data } = await axios.post(
-        "http://localhost:8000/upload",
+        "https://tame-lime-haddock-robe.cyclic.app/upload",
         formData
       );
       console.log("uploadImg");
@@ -46,7 +46,7 @@ export default function NewPost() {
   };
 
   const addPost = async (obj) => {
-    const { data } = axios.post("http://localhost:8000/posts", obj);
+    const { data } = axios.post("https://tame-lime-haddock-robe.cyclic.app/posts", obj);
     return data;
   };
 
