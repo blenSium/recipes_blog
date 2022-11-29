@@ -18,6 +18,7 @@ const getPostById = (id) => {
         title: obj.title,
         description: obj.description,
         recipe: obj.recipe,
+        preparation:obj.preparation,
         img:obj.img,
         time:obj.time,
         userId: obj.userId,

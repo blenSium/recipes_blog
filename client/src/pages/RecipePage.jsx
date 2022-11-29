@@ -16,8 +16,8 @@ export default function RecipePage() {
   const navigate = useNavigate()
 
 
-  const getPost = async () => {
-    const { data } = await axios.get(`https://tame-lime-haddock-robe.cyclic.app/posts/${id}`);
+  const getPostRecipe = async () => {
+    const { data } = await axios.get(`http://localhost:8000/posts/${id}`);
     setPost(data);
     setRecipes(data.recipe);
   };
@@ -30,7 +30,7 @@ export default function RecipePage() {
   };
 
   useEffect(() => {
-    getPost();
+    getPostRecipe();
     getUser()
   }, [post]);
 
@@ -75,6 +75,7 @@ export default function RecipePage() {
         <h3 className="font-bold my-10 text-2xl text-center underline">
           אופן הכנה{" "}
         </h3>
+        <p className="text-right mb-4"><span className="font-bold">זמן הכנה </span>{post.time}</p>
         <div className=" m-auto text-right w-full text-lg">
           {post.preparation}
         </div>

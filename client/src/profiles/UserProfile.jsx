@@ -2,6 +2,7 @@ import React,{useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios'
 import RecipeCard from "../components/RecipeCard";
+import { getUser } from "../utils";
 
 
 export default function UserProfile() {
@@ -15,15 +16,10 @@ export default function UserProfile() {
     );
     setUsersPosts(data);
   };
-  const getUser = async () => {
-    const { data } = await axios.get(`https://tame-lime-haddock-robe.cyclic.app/users/${id}`);
-    setUser(data);
-    console.log(data);
-  };
 
   useEffect(() => {
     getUsersPosts();
-    getUser();
+    getUser(id,setUser)
   }, []);
 
   return (

@@ -2,25 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { format } from "timeago.js";
-// import IconButton from "@mui/material/IconButton";
-// import Menu from "@mui/material/Menu";
-// import MenuItem from "@mui/material/MenuItem";
-// import MoreVertIcon from "@mui/icons-material/MoreVert";
-
-// const options = ["עריכה", "מחיקה"];
 
 export default function CommentsSection({ postId }) {
   const [comments, setComments] = useState([]);
   const userName = sessionStorage.getItem("userName");
-//   const [anchorEl, setAnchorEl] = useState(null);
-//   const open = Boolean(anchorEl);
-//   const handleClick = (event) => {
-//     setAnchorEl(event.currentTarget);
-//   };
-
-//   const handleClose = () => {
-//     setAnchorEl(null);
-//   };
 
   const getPostsComments = async () => {
     const { data } = await axios.get(

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+// import { toBase64 } from "../utils";
 
 export default function EditPost({ postId, visible, onClose }) {
   const [select, setSelect] = useState("");
@@ -61,10 +62,16 @@ export default function EditPost({ postId, visible, onClose }) {
             <div>
               <input
                 type={"file"}
-                onChange={(e) => setFile(e.target.files[0])}
+                onChange={async (e) => {
+                  setFile(e.target.files[0]);
+                  console.log('aaa');
+                }}
                 className="bg-gray-50 border text-right my-4 pr-8 border-gray-300 w-full text-gray-900 text-sm rounded-lg"
               />
-              <button className="hover:underline" onClick={() => uploadImg()}>
+              <button
+                className="hover:underline"
+                onClick={() => uploadImg()}
+              >
                 העלאה
               </button>
             </div>
@@ -77,7 +84,7 @@ export default function EditPost({ postId, visible, onClose }) {
               className="hover:underline"
               onClick={() => {
                 updatePost(updatedPost);
-                onClose()
+                onClose();
               }}
             >
               בצע שינוי
