@@ -7,13 +7,13 @@ export default function PostsFeed() {
   const [posts, setPosts] = useState([]);
   const [input, setInput] = useState("");
 
+  const getPosts = async () => {
+    const { data } = await axios.get("http://localhost:8000/posts");
+    setPosts(data);
+  };
   useEffect(() => {
-    const getPosts = async () => {
-      const { data } = await axios.get("https://tame-lime-haddock-robe.cyclic.app/posts");
-      setPosts(data);
-    };
     getPosts();
-  }, [posts]);
+  }, []);
 
   const filteredRecipes = () => {
     const array = posts.filter((post) => {
