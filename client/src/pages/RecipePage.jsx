@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import CommentInput from "../components/CommentInput";
 import CommentsSection from "../components/CommentsSection";
 
-
 export default function RecipePage() {
   const [post, setPost] = useState({});
   const [recipe, setRecipes] = useState([]);
@@ -13,31 +12,36 @@ export default function RecipePage() {
   const [alert, setAlert] = useState("none");
   const [comment, setComment] = useState("none");
   const userId = sessionStorage.getItem("userId");
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const getPostRecipe = async () => {
-    const { data } = await axios.get(`https://tame-lime-haddock-robe.cyclic.app/posts/${id}`);
+    const { data } = await axios.get(
+      `https://tame-lime-haddock-robe.cyclic.app/posts/${id}`
+    );
     setPost(data);
     setRecipes(data.recipe);
   };
 
   const getUser = async () => {
-    if(post.userId){
-      const { data } = await axios.get(`https://tame-lime-haddock-robe.cyclic.app/users/${post.userId}`);
+    if (post.userId) {
+      const { data } = await axios.get(
+        `https://tame-lime-haddock-robe.cyclic.app/users/${post.userId}`
+      );
       setUser(data);
     }
   };
 
   useEffect(() => {
     getPostRecipe();
-    getUser()
-  }, [post]);
+  }, []);
 
+  useEffect(() => {
+    getUser();
+  }, [recipe]);
 
   const addComment = () => {
     if (userId) {
-      setComment('block')
+      setComment("block");
     } else {
       setAlert("flex");
     }
@@ -49,7 +53,12 @@ export default function RecipePage() {
         className="w-full md:w-3/4 m-auto flex flex-col md:p-20 p-10 shadow-lg h-4/6 mt-10 mb-40"
         style={{ backgroundColor: "#E0D6D4", fontFamily: "Rubik, sans-serif" }}
       >
-        <button className="font-bold text-center hover:underline" onClick={()=>navigate(`/${user._id}`)}>{user.fullName}</button>
+        <button
+          className="font-bold text-center hover:underline"
+          onClick={() => navigate(`/${user._id}`)}
+        >
+          {user.fullName}
+        </button>
         <h1 className="text-center text-6xl">{post.title}</h1>
         <p className="text-center my-5">{post.description}</p>
         <img
@@ -75,7 +84,10 @@ export default function RecipePage() {
         <h3 className="font-bold my-10 text-2xl text-center underline">
           אופן הכנה{" "}
         </h3>
-        <p className="text-right mb-4"><span className="font-bold">זמן הכנה </span>{post.time}</p>
+        <p className="text-right mb-4">
+          <span className="font-bold">זמן הכנה </span>
+          {post.time}
+        </p>
         <div className=" m-auto text-right w-full text-lg">
           {post.preparation}
         </div>
@@ -89,7 +101,7 @@ export default function RecipePage() {
           להוספת תגובה +
         </button>
       </div>
-      <div style={{display:`${alert}`}}>
+      <div style={{ display: `${alert}` }}>
         <div
           className="flex md:w-2/4 w-full m-auto p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800"
           role="alert"
@@ -111,10 +123,10 @@ export default function RecipePage() {
           <div>עלייך להירשם / להתחבר כדי להגיב</div>
         </div>
       </div>
-        <div style={{display:`${comment}`}}>
-        <CommentInput userId={userId} postId={id}/>
-        </div>
-        <CommentsSection postId={id}/>
+      <div style={{ display: `${comment}` }}>
+        <CommentInput userId={userId} postId={id} />
+      </div>
+      <CommentsSection postId={id} />
     </div>
   );
 }

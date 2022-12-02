@@ -46,7 +46,7 @@ export default function NewPost() {
   };
 
   const addPost = async (obj) => {
-    const { data } = axios.post("https://tame-lime-haddock-robe.cyclic.app/posts", obj);
+    const { data } = await axios.post("https://tame-lime-haddock-robe.cyclic.app/posts", obj);
     return data;
   };
 

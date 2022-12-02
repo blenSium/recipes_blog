@@ -20,7 +20,7 @@ export default function Profile() {
   useEffect(() => {
     getUsersPosts();
     getUser(userId,setUser)
-  }, [usersPosts]);
+  }, []);
 
   return (
     <div style={{ minHeight: "600px" }}>

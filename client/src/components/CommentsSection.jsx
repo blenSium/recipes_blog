@@ -5,7 +5,6 @@ import { format } from "timeago.js";
 
 export default function CommentsSection({ postId }) {
   const [comments, setComments] = useState([]);
-  const userName = sessionStorage.getItem("userName");
 
   const getPostsComments = async () => {
     const { data } = await axios.get(
@@ -16,7 +15,7 @@ export default function CommentsSection({ postId }) {
 
   useEffect(() => {
     getPostsComments();
-  }, [comments]);
+  }, []);
 
   return (
     <div className="my-20">

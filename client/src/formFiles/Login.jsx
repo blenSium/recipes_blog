@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import cookItLogo from "../assets/cookit_logo.png";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login({ visible, onClose }) {
   const [user, setUser] = useState({});
@@ -11,27 +11,17 @@ export default function Login({ visible, onClose }) {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const fetchUsers = async (obj) => {
-    const response = await fetch("https://tame-lime-haddock-robe.cyclic.app/users/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(obj),
-    });
 
-    response.json().then((data) => {
-      if (data === null) {
-        console.log("wrong username or password");
-        setMsg("wrong username or password");
-      } else {
-        console.log(data.fullName);
-        window.sessionStorage.setItem("userId", data._id);
-        window.sessionStorage.setItem("userName", data.fullName);
-        onClose();
-      }
-    });
+  const fetchUsersLogin = async (obj) => {
+    const { data } = await axios.post("https://tame-lime-haddock-robe.cyclic.app/users/login", obj);
+    if (data === null) {
+      console.log("wrong username or password");
+      setMsg("wrong username or password");
+    } else {
+      console.log(data.fullName);
+      window.sessionStorage.setItem("userId", data._id);
+      onClose();
+    }
   };
 
   return (
@@ -45,7 +35,6 @@ export default function Login({ visible, onClose }) {
               className="m-auto mb-5"
               alt="logo"
             />
-            <form>
               <input
                 type="email"
                 className="block border border-grey-light w-full p-3 rounded mb-4"
@@ -68,7 +57,7 @@ export default function Login({ visible, onClose }) {
                 <button
                   className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md font-semibold capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition"
                   style={{ backgroundColor: "#FCA2AD" }}
-                  onClick={() => fetchUsers(user)}
+                  onClick={() => fetchUsersLogin(user)}
                 >
                   Sign In
                 </button>
@@ -81,7 +70,6 @@ export default function Login({ visible, onClose }) {
                   back
                 </button>
               </div>
-            </form>
           </div>
         </div>
       </div>

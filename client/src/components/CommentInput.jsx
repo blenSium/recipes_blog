@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 
 
-export default function CommentInput({userId, postId}) {
+export default function CommentInput({postId}) {
     const userName = sessionStorage.getItem("userName")
     const[comment,setComment] = useState({userName: userName, postId: postId})
 
