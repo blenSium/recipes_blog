@@ -12,20 +12,20 @@ export default function NewPost() {
   const [post, setPost] = useState({ userId: userId });
   const navigate = useNavigate();
 
-  const uploadImg = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const { data } = await axios.post(
-        "https://tame-lime-haddock-robe.cyclic.app/upload",
-        formData
-      );
-      console.log("uploadImg");
-      setImgUrl(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const uploadImg = async () => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("file", file);
+  //     const { data } = await axios.post(
+  //       "https://tame-lime-haddock-robe.cyclic.app/upload",
+  //       formData
+  //     );
+  //     console.log("uploadImg");
+  //     setImgUrl(data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const getInput = (e) => {
     setInput(e.target.value);
@@ -49,6 +49,22 @@ export default function NewPost() {
     const { data } = await axios.post("https://tame-lime-haddock-robe.cyclic.app/posts", obj);
     return data;
   };
+
+  const handleImg = (e)=>{
+    const file = e.target.files[0];
+    setFileToBase(file);
+  }
+
+
+  const setFileToBase = (file)=>{
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = ()=>{
+      setImgUrl(reader.result)
+    }
+  }
+
+
 
 
   return (
@@ -75,10 +91,9 @@ export default function NewPost() {
             <input
               className="block text-right w-full md:w-3/4  text-sm text-gray-900 bg-gray-50 rounded-lg border "
               type="file"
-              onChange={(e) =>{ setFile(e.target.files[0]);
-              console.log(file)}}
+              onChange={handleImg}
             />
-            <button onClick={() => uploadImg()}>לחץ לאחר בחירת הקובץ</button>
+            {/* <button onClick={() => uploadImg()}>לחץ לאחר בחירת הקובץ</button> */}
           </div>
           <div
             className="my-6 mx-auto"
@@ -86,7 +101,7 @@ export default function NewPost() {
           >
             <img
               style={{ width: "100%", height: "100%" }}
-              src={`./upload/${imgUrl}`}
+              src={`${imgUrl}`}
               className="w-full h-full"
             />
           </div>
