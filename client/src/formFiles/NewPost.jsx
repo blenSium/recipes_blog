@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function NewPost() {
   const userId = sessionStorage.getItem("userId");
   const [file, setFile] = useState(null);
-  const [imgUrl, setImgUrl] = useState("1669591531261default-placeholder-1024x1024-570x321.png");
+  const [imgUrl, setImgUrl] = useState("https://res.cloudinary.com/dijq5lrt4/image/upload/v1671745507/recipes/xbmgqhweofflvz7cckzh.png");
   const [ingredient, setIngredients] = useState([]);
   const [input, setInput] = useState("");
   const [post, setPost] = useState({ userId: userId });
