@@ -13,7 +13,7 @@ export default function Login({ visible, onClose }) {
 
 
   const fetchUsersLogin = async (obj) => {
-    const { data } = await axios.post(`${process.env.REACT_APP_API}/users/login`, obj);
+    const { data } = await axios.post(`https://nice-erin-cricket-boot.cyclic.app/users/login`, obj);
     if (data === null) {
       console.log("wrong username or password");
       setMsg("wrong username or password");

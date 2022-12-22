@@ -33,7 +33,7 @@ export default function RecipeCard({ recipe, profile }) {
   };
 
   const deletePost = async (id) => {
-    const { data } = axios.delete(`${process.env.REACT_APP_API}/posts/${id}`, id);
+    const { data } = axios.delete(`https://nice-erin-cricket-boot.cyclic.app/posts/${id}`, id);
     return data;
   };
   const scroll = () => {

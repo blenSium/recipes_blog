@@ -31,7 +31,7 @@ export default function NewPost() {
   };
 
   const addPost = async (obj) => {
-    const { data } = await axios.post(`${process.env.REACT_APP_API}/posts`, obj);
+    const { data } = await axios.post(`https://nice-erin-cricket-boot.cyclic.app/posts`, obj);
     return data;
   };
 

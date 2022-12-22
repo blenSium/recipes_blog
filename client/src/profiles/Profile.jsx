@@ -12,7 +12,7 @@ export default function Profile() {
 
   const getUsersPosts = async () => {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/posts?userId=${userId}`
+      `https://nice-erin-cricket-boot.cyclic.app/posts?userId=${userId}`
     );
     setUsersPosts(data);
   };

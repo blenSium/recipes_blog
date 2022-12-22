@@ -13,7 +13,7 @@ export default function SignUP({ visible, onClose }) {
   }
 
   const addUser = async (newUser) => {
-    const { data } = await axios.post(`${process.env.REACT_APP_API}/users`, newUser);
+    const { data } = await axios.post(`https://nice-erin-cricket-boot.cyclic.app/users`, newUser);
     setDisplay('block')
     return data;
   };

@@ -8,7 +8,7 @@ export default function CommentsSection({ postId }) {
 
   const getPostsComments = async () => {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/comments?postId=${postId}`
+      `https://nice-erin-cricket-boot.cyclic.app/comments?postId=${postId}`
     );
     setComments(data);
   };

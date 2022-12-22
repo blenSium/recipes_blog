@@ -9,7 +9,7 @@ export default function EditPost({ postId, visible, onClose }) {
 
   const updatePost = async (obj) => {
     const { data } = await axios.put(
-      `${process.env.REACT_APP_API}/posts/${postId}`,
+      `https://nice-erin-cricket-boot.cyclic.app/posts/${postId}`,
       obj
     );
     return data;

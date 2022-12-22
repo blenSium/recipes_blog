@@ -9,7 +9,7 @@ export default function Courses() {
   const handleOnClose = () => setShowDetails(false);
 
   const getAllCourses = async () => {
-    const { data } = await axios.get(`${process.env.REACT_APP_API}/courses`);
+    const { data } = await axios.get(`https://nice-erin-cricket-boot.cyclic.app/courses`);
     setCourses(data);
   };
 

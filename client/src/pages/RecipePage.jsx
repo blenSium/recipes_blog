@@ -16,7 +16,7 @@ export default function RecipePage() {
 
   const getPostRecipe = async () => {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/posts/${id}`
+      `https://nice-erin-cricket-boot.cyclic.app/posts/${id}`
     );
     setPost(data);
     setRecipes(data.recipe);
@@ -25,7 +25,7 @@ export default function RecipePage() {
   const getUser = async () => {
     if (post.userId) {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/users/${post.userId}`
+        `https://nice-erin-cricket-boot.cyclic.app/users/${post.userId}`
       );
       setUser(data);
     }

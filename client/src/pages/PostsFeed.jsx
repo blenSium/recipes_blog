@@ -8,7 +8,7 @@ export default function PostsFeed() {
   const [input, setInput] = useState("");
 
   const getPosts = async () => {
-    const { data } = await axios.get(`${process.env.REACT_APP_API}/posts`);
+    const { data } = await axios.get(`https://nice-erin-cricket-boot.cyclic.app/posts`);
     setPosts(data);
   };
   useEffect(() => {
