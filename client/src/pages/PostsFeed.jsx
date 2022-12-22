@@ -8,7 +8,7 @@ export default function PostsFeed() {
   const [input, setInput] = useState("");
 
   const getPosts = async () => {
-    const { data } = await axios.get("https://tame-lime-haddock-robe.cyclic.app/posts");
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/posts`);
     setPosts(data);
   };
   useEffect(() => {

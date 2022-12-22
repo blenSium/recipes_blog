@@ -12,7 +12,7 @@ export default function UserProfile() {
 
   const getUsersPosts = async () => {
     const { data } = await axios.get(
-      `https://tame-lime-haddock-robe.cyclic.app/posts?userId=${id}`
+      `${process.env.REACT_APP_API}/posts?userId=${id}`
     );
     setUsersPosts(data);
   };

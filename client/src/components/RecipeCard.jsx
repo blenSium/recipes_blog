@@ -33,7 +33,7 @@ export default function RecipeCard({ recipe, profile }) {
   };
 
   const deletePost = async (id) => {
-    const { data } = axios.delete(`https://tame-lime-haddock-robe.cyclic.app/posts/${id}`, id);
+    const { data } = axios.delete(`${process.env.REACT_APP_API}/posts/${id}`, id);
     return data;
   };
   const scroll = () => {
@@ -44,14 +44,14 @@ export default function RecipeCard({ recipe, profile }) {
     <div>
       <Card
         sx={{ maxWidth: 345 }}
-        className="mb-16"
+        className="mb-16 hover:shadow-2xl"
         style={{ height: "470px" }}
       >
         <CardMedia
           component="img"
           alt="dish"
           style={{ height: "300px", width: "400px" }}
-          image={`../upload/${recipe.img}`}
+          image={recipe.img.url}
         />
         <CardContent className="text-right">
           <Typography gutterBottom variant="h5" component="div">

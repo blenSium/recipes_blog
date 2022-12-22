@@ -13,7 +13,7 @@ export default function SignUP({ visible, onClose }) {
   }
 
   const addUser = async (newUser) => {
-    const { data } = await axios.post("https://tame-lime-haddock-robe.cyclic.app/users", newUser);
+    const { data } = await axios.post(`${process.env.REACT_APP_API}/users`, newUser);
     setDisplay('block')
     return data;
   };
@@ -40,7 +40,7 @@ export default function SignUP({ visible, onClose }) {
                 <input
                   type="email"
                   className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 my-8"
-                  placeholder="Eamil Adress "
+                  placeholder="Email"
                   name='email'
                   onChange={handleInput}
                 />

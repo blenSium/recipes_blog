@@ -16,7 +16,7 @@ export default function RecipePage() {
 
   const getPostRecipe = async () => {
     const { data } = await axios.get(
-      `https://tame-lime-haddock-robe.cyclic.app/posts/${id}`
+      `${process.env.REACT_APP_API}/posts/${id}`
     );
     setPost(data);
     setRecipes(data.recipe);
@@ -25,7 +25,7 @@ export default function RecipePage() {
   const getUser = async () => {
     if (post.userId) {
       const { data } = await axios.get(
-        `https://tame-lime-haddock-robe.cyclic.app/users/${post.userId}`
+        `${process.env.REACT_APP_API}/users/${post.userId}`
       );
       setUser(data);
     }
@@ -62,7 +62,7 @@ export default function RecipePage() {
         <h1 className="text-center text-6xl">{post.title}</h1>
         <p className="text-center my-5">{post.description}</p>
         <img
-          src={`../upload/${post.img}`}
+          src={post?.img?.url}
           alt="dish"
           style={{
             width: "70%",

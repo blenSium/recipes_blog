@@ -1,6 +1,8 @@
+const dotenv = require("dotenv").config()
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer")
+const bodyParser = require("body-parser")
 const usersRouter = require("./routers/usersRouter");
 const postsRouter = require("./routers/postsRouter");
 const coursesRouter = require("./routers/coursesRouter");
@@ -8,38 +10,18 @@ const commentsRouter = require("./routers/commentsRouter");
 
 const app = express();
 const port = 8000;
-app.use(express.json());
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
+app.use(bodyParser.json({ limit: "50mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(
   cors(
-  //   {
-  //   origin: "*",
-  //   methods: ["GET", "POST", "PUT", "DELETE"],
-  // }
+    {
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  }
   )
 );
 
-const storage = multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,"../client/public/upload")
-    },
-    filename:(req,file,cb)=>{
-        cb(null,Date.now() + file.originalname)
-    }
-  })
 
-const upload = multer({storage: storage})
-
-app.post('/upload',upload.single("file"),(req,res)=>{
-    res.json(req.file.filename)
-})
 
 require("./config/database");
 app.use("/users", usersRouter);

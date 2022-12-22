@@ -12,7 +12,7 @@ export default function Profile() {
 
   const getUsersPosts = async () => {
     const { data } = await axios.get(
-      `https://tame-lime-haddock-robe.cyclic.app/posts?userId=${userId}`
+      `${process.env.REACT_APP_API}/posts?userId=${userId}`
     );
     setUsersPosts(data);
   };
@@ -23,7 +23,7 @@ export default function Profile() {
   }, []);
 
   return (
-    <div style={{ minHeight: "600px" }}>
+    <div style={{ minHeight: "850px" }}>
       <div className="bg-pink-200 w-64 p-2">
         <h1
           className="text-center font-bold text-5xl"

@@ -1,35 +1,32 @@
 import axios from "axios";
 import React, { useState } from "react";
-// import { toBase64 } from "../utils";
 
 export default function EditPost({ postId, visible, onClose }) {
   const [select, setSelect] = useState("");
   const [updatedPost, setUpdated] = useState({});
-  const [file, setFile] = useState(null);
 
   if (!visible) return null;
 
   const updatePost = async (obj) => {
     const { data } = await axios.put(
-      `https://tame-lime-haddock-robe.cyclic.app/posts/${postId}`,
+      `${process.env.REACT_APP_API}/posts/${postId}`,
       obj
     );
     return data;
   };
 
-  const uploadImg = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const { data } = await axios.post(
-        "https://tame-lime-haddock-robe.cyclic.app/upload",
-        formData
-      );
-      setUpdated({ [select]: data });
-    } catch (err) {
-      console.log(err);
+  const setFileToBase = (file)=>{
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = ()=>{
+      setUpdated({ [select]: reader.result });
     }
-  };
+  }
+
+  const handleImg = (e)=>{
+    const file = e.target.files[0];
+    setFileToBase(file);
+  }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 min-h-screen flex flex-col">
@@ -62,18 +59,9 @@ export default function EditPost({ postId, visible, onClose }) {
             <div>
               <input
                 type={"file"}
-                onChange={async (e) => {
-                  setFile(e.target.files[0]);
-                  console.log('aaa');
-                }}
+                onChange={handleImg}
                 className="bg-gray-50 border text-right my-4 pr-8 border-gray-300 w-full text-gray-900 text-sm rounded-lg"
               />
-              <button
-                className="hover:underline"
-                onClick={() => uploadImg()}
-              >
-                העלאה
-              </button>
             </div>
           )}
           <div className="mt-8 flex justify-between">

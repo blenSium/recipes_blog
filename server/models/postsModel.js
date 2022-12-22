@@ -7,7 +7,10 @@ const postSchema = new Schema({
     description:String,
     recipe:[String],
     preparation:String,
-    img:String,
+    img:{
+        public_id : String,
+        url: String
+    },
     time:String,
     userId:String
 },{timestamps:true})

@@ -12,21 +12,6 @@ export default function NewPost() {
   const [post, setPost] = useState({ userId: userId });
   const navigate = useNavigate();
 
-  // const uploadImg = async () => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("file", file);
-  //     const { data } = await axios.post(
-  //       "https://tame-lime-haddock-robe.cyclic.app/upload",
-  //       formData
-  //     );
-  //     console.log("uploadImg");
-  //     setImgUrl(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   const getInput = (e) => {
     setInput(e.target.value);
   };
@@ -46,7 +31,7 @@ export default function NewPost() {
   };
 
   const addPost = async (obj) => {
-    const { data } = await axios.post("https://tame-lime-haddock-robe.cyclic.app/posts", obj);
+    const { data } = await axios.post(`${process.env.REACT_APP_API}/posts`, obj);
     return data;
   };
 
